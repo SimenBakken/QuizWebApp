@@ -1,6 +1,8 @@
+using Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -21,6 +23,12 @@ namespace WebApp
         {
 
             services.AddControllersWithViews();
+
+            // Set option to use SQLite with connection string from app settings
+            services.AddDbContext<QuizDbContext>(options =>
+            {
+                options.UseSqlite(Configuration.GetConnectionString("QuizDatabase"));
+            });
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -52,6 +60,13 @@ namespace WebApp
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
             });
+
+            // Make sure SQLite database is created
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<QuizDbContext>();
+                context.Database.EnsureCreated();
+            }
 
             app.UseSpa(spa =>
             {
