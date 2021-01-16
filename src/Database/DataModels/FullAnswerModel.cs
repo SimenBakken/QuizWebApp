@@ -5,10 +5,9 @@ using System.Text;
 
 namespace Database.DataModels
 {
-    public class FullQuizModel
+    public class FullAnswerModel
     {
-        public QuizModel Quiz { get; set; }
-
-        public List<FullQuestionModel> Questions { get; set; }
+        public AnswerModel Answer { get; set; }
+        public bool Selected { get; set; }
     }
 }

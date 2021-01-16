@@ -21,9 +21,9 @@ namespace Database.DataLayer
                     new FullQuestionModel()
                     {
                         Question = context.Questions.FirstOrDefault(y => y.Id == x.QuestionId),
-                        Answers = context.AnswersToQuestions.Where(y => y.QuestionId == x.QuestionId).Select(y => context.Answers.FirstOrDefault(z => z.Id == y.AnswerId)).AsEnumerable()
+                        Answers = context.AnswersToQuestions.Where(y => y.QuestionId == x.QuestionId).Select(y => new FullAnswerModel() { Answer = context.Answers.FirstOrDefault(z => z.Id == y.AnswerId) }).ToList()
                     }
-                );
+                ).ToList();
 
                 return fullQuiz;
             }

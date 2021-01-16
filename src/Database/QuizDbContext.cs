@@ -1,4 +1,5 @@
 ﻿using Database.Models;
+using Database.Models.Enums;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -45,13 +46,13 @@ namespace Database
             modelBuilder.Entity<QuestionTypeModel>().HasData(
                 new QuestionTypeModel
                 {
-                    Id = 1,
+                    Id = (int)TypeIdEnum.MultipleChoice,
                     Type = "Multiple choice",
                     Description = "Give multiple options, but only one is correct"
                 },
                 new QuestionTypeModel
                 {
-                    Id = 2,
+                    Id = (int)TypeIdEnum.MultipleCorrect,
                     Type = "Multiple correct",
                     Description = "Give multiple options, multiple can be correct"
                 }

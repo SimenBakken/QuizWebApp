@@ -7,7 +7,8 @@ namespace Database.DataModels
 {
     public class FullQuestionModel
     {
+        public bool Correct { get; set; }
         public QuestionModel Question { get; set; }
-        public IEnumerable<AnswerModel> Answers { get; set; }
+        public List<FullAnswerModel> Answers { get; set; }
     }
 }
