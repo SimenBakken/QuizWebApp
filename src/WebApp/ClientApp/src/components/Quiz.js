@@ -107,8 +107,13 @@ export class Quiz extends Component {
                 {question.answers.find(
                   (x) => x.selected == true && x.answer.correct == false
                 )
-                  ? "0/1"
-                  : "1/1"}
+                  ? "0/" +
+                    question.answers.filter((x) => x.answer.correct).length
+                  : question.answers.filter(
+                      (x) => x.selected && x.answer.correct
+                    ).length +
+                    "/" +
+                    question.answers.filter((x) => x.answer.correct).length}
               </p>
             )}
           </>
@@ -143,15 +148,34 @@ export class Quiz extends Component {
           </AvGroup>
         </AvForm>
         {this.state.done && (
-          <p class="total">
-            Total:{" "}
-            {this.state.data.questions.filter((x) => x.correct).length +
-              "/" +
-              this.state.data.questions.length}
-          </p>
+          <p class="total">Total: {this.totalCorrectString()}</p>
         )}
       </div>
     );
+  }
+
+  totalCorrectString() {
+    let count = 0;
+    let total = 0;
+    for (const question of this.state.data.questions) {
+      switch (question.question.typeId) {
+        case 1:
+          if (question.correct) {
+            count++;
+          }
+          total++;
+          break;
+        case 2:
+          if (question.correct) {
+            count += question.answers.filter(
+              (x) => x.selected && x.answer.correct
+            ).length;
+          }
+          total += question.answers.filter((x) => x.answer.correct).length;
+          break;
+      }
+    }
+    return count + "/" + total;
   }
 
   render() {

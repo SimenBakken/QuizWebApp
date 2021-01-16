@@ -9,7 +9,7 @@ namespace Database
 {
     public class QuizDbContext : DbContext
     {
-        // Define models in databse context
+        // Define models in database context
         public DbSet<AnswerModel> Answers { get; set; }
         public DbSet<AnswerToQuestionMapModel> AnswersToQuestions { get; set; }
         public DbSet<QuestionModel> Questions { get; set; }
@@ -42,7 +42,7 @@ namespace Database
                 {
                     Id = 1,
                     Name = "Demo quiz",
-                    Description = "Demonstration quiz to show the web application working"
+                    Description = "Demonstration quiz with 4 questions to show the web application working"
                 }
             );
 
@@ -65,14 +65,26 @@ namespace Database
                 new QuestionModel
                 {
                     Id = 1,
-                    Question = "What sound does a dog make?",
+                    Question = "How many blue stripes are there on the U.S. flag?",
                     TypeId = 1
                 },
                 new QuestionModel
                 {
                     Id = 2,
-                    Question = "What is 8 + 8?",
+                    Question = "What trees can you find in Norway? (one point for each correct, zero point if any wrong)",
                     TypeId = 2
+                },
+                new QuestionModel
+                {
+                    Id = 3,
+                    Question = "In what year did the Wall Street Crash take place?",
+                    TypeId = 1
+                }, 
+                new QuestionModel
+                {
+                    Id = 4,
+                    Question = "Which country has appeared in three soccer World Cup finals but has never won?",
+                    TypeId = 1
                 }
             );
 
@@ -80,56 +92,98 @@ namespace Database
                 new AnswerModel
                 {
                     Id = 1,
-                    Answer = "Meow",
+                    Answer = "6",
                     Correct = false
                 },
                 new AnswerModel
                 {
                     Id = 2,
-                    Answer = "Mooo",
+                    Answer = "7",
                     Correct = false
                 },
                 new AnswerModel
                 {
                     Id = 3,
-                    Answer = "Oink",
+                    Answer = "13",
                     Correct = false
                 },
                 new AnswerModel
                 {
                     Id = 4,
-                    Answer = "Woof",
+                    Answer = "0",
                     Correct = true
                 },
                 new AnswerModel
                 {
                     Id = 5,
-                    Answer = "Chrip",
-                    Correct = false
+                    Answer = "Osp",
+                    Correct = true
                 },
                 new AnswerModel
                 {
                     Id = 6,
-                    Answer = "5",
+                    Answer = "Akasie",
                     Correct = false
                 },
                 new AnswerModel
                 {
                     Id = 7,
-                    Answer = "16",
+                    Answer = "Or",
                     Correct = true
                 },
                 new AnswerModel
                 {
                     Id = 8,
-                    Answer = "Sixteen",
-                    Correct = true
+                    Answer = "Tuja",
+                    Correct = false
                 },
                 new AnswerModel
                 {
                     Id = 9,
-                    Answer = "Twelve",
+                    Answer = "1929",
+                    Correct = true
+                },
+                new AnswerModel
+                {
+                    Id = 10,
+                    Answer = "1932",
                     Correct = false
+                },
+                new AnswerModel
+                {
+                    Id = 11,
+                    Answer = "1930",
+                    Correct = false
+                },
+                new AnswerModel
+                {
+                    Id = 12,
+                    Answer = "1925",
+                    Correct = false
+                },
+                new AnswerModel
+                {
+                    Id = 13,
+                    Answer = "England",
+                    Correct = false
+                },
+                new AnswerModel
+                {
+                    Id = 14,
+                    Answer = "Spain",
+                    Correct = false
+                },
+                new AnswerModel
+                {
+                    Id = 15,
+                    Answer = "Uruguay",
+                    Correct = false
+                },
+                new AnswerModel
+                {
+                    Id = 16,
+                    Answer = "Netherlands",
+                    Correct = true
                 }
             );
 
@@ -156,7 +210,7 @@ namespace Database
                 },
                 new AnswerToQuestionMapModel
                 {
-                    QuestionId = 1,
+                    QuestionId = 2,
                     AnswerId = 5
                 },
                 new AnswerToQuestionMapModel
@@ -176,8 +230,43 @@ namespace Database
                 },
                 new AnswerToQuestionMapModel
                 {
-                    QuestionId = 2,
+                    QuestionId = 3,
                     AnswerId = 9
+                },
+                new AnswerToQuestionMapModel
+                {
+                    QuestionId = 3,
+                    AnswerId = 10
+                },
+                new AnswerToQuestionMapModel
+                {
+                    QuestionId = 3,
+                    AnswerId = 11
+                },
+                new AnswerToQuestionMapModel
+                {
+                    QuestionId = 3,
+                    AnswerId = 12
+                },
+                new AnswerToQuestionMapModel
+                {
+                    QuestionId = 4,
+                    AnswerId = 13
+                },
+                new AnswerToQuestionMapModel
+                {
+                    QuestionId = 4,
+                    AnswerId = 14
+                },
+                new AnswerToQuestionMapModel
+                {
+                    QuestionId = 4,
+                    AnswerId = 15
+                },
+                new AnswerToQuestionMapModel
+                {
+                    QuestionId = 4,
+                    AnswerId = 16
                 }
             );
 
@@ -191,6 +280,16 @@ namespace Database
                 {
                     QuizId = 1,
                     QuestionId = 2
+                },
+                new QuestionToQuizMapModel
+                {
+                    QuizId = 1,
+                    QuestionId = 3
+                },
+                new QuestionToQuizMapModel
+                {
+                    QuizId = 1,
+                    QuestionId = 4
                 }
             );
         }
