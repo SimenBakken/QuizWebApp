@@ -9,6 +9,22 @@ namespace Database.DataLayer
 {
     public static class QuizData
     {
+        /// <summary>
+        /// Get a list of all Quizzes in the database
+        /// </summary>
+        /// <param name="context">Database context</param>
+        /// <returns></returns>
+        public static IEnumerable<QuizModel> GetAllQuizzes(QuizDbContext context)
+        {
+            return context.Quizzes;
+        }
+
+        /// <summary>
+        /// Get a quiz
+        /// </summary>
+        /// <param name="context">Database context</param>
+        /// <param name="quizId">Id of quiz to get</param>
+        /// <returns></returns>
         public static FullQuizModel GetQuiz(QuizDbContext context, int quizId)
         {
             QuizModel quiz = context.Quizzes.FirstOrDefault(x => x.Id == quizId);

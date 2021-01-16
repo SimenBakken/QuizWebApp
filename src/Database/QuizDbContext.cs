@@ -9,6 +9,7 @@ namespace Database
 {
     public class QuizDbContext : DbContext
     {
+        // Define models in databse context
         public DbSet<AnswerModel> Answers { get; set; }
         public DbSet<AnswerToQuestionMapModel> AnswersToQuestions { get; set; }
         public DbSet<QuestionModel> Questions { get; set; }
@@ -26,14 +27,16 @@ namespace Database
         }
 
         /// <summary>
-        /// Seed data on database create
+        /// Seed data on database create and set keys
         /// </summary>
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Set primary key for tables that have multiple columns as key
             modelBuilder.Entity<AnswerToQuestionMapModel>().HasKey("AnswerId", "QuestionId");
             modelBuilder.Entity<QuestionToQuizMapModel>().HasKey("QuizId", "QuestionId");
 
+            // Seed example quiz on database create
             modelBuilder.Entity<QuizModel>().HasData(
                 new QuizModel
                 {
